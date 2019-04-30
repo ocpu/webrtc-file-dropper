@@ -45,7 +45,13 @@ export function createConnection() {
   let id
   /** @type {{receiverId:string,sendCh:RTCDataChannel,recvCh:RTCDataChannel,sender:RTCPeerConnection,receiver:RTCPeerConnection}[]} */
   let peers = []
-  const ws = new WebSocket('ws://localhost:3000/gateway')
+  const ws = new WebSocket(
+    (location.protocol === 'https:' ? 'wss' : 'ws') +
+    '://' +
+    location.hostname +
+    (location.port ? ':' + location.port : '') +
+    '/gateway'
+  )
 
   ws.addEventListener('open', () => {
     for (const listener of eventListeners['open'] || []) {
