@@ -196,4 +196,4 @@ app.get(/\/.*/, (_, res) => {
     .pipe(res.status(200).contentType('html'))
 })
 
-const server = app.listen(3000, () => mainLog('Now listening on: http://localhost:' + (<AddressInfo>server.address()).port))
+const server = app.listen(process.env.PORT || 3000, () => mainLog('Now listening on: http://localhost:' + (<AddressInfo>server.address()).port))
